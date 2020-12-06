@@ -1,0 +1,155 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Клиент Базы Организации" Height="600" Width="1000">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Директор">
+                <TabItem.Content>
+                    <Grid>
+                        <TabControl>
+                            <TabItem Header="Product">
+                                <TabItem.Content>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <DataGrid AutoGenerateColumns="False" x:Name="productGrid" Margin="10,50,10,100">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="ID" Binding="{Binding Path=ProductId}" Width="100" />
+                                                <DataGridTextColumn Header="Rnumber" Binding="{Binding Path=Rnumber}" Width="100" />
+                                                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name}" Width="100" />
+                                                <DataGridTextColumn Header="Unit" Binding="{Binding Path=Unit}" Width="100" />
+
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+
+                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,20" Height="40" Width="400" VerticalAlignment="Bottom">
+                                            <Button x:Name="updateButtonProduct" Content="Обновить" Width="80" Height="40" Margin="10,0,10,0" Click="updateButtonProduct_Click"/>
+                                            <Button x:Name="insertButtonProduct" Content="Добавить" Width="80" Height="40" Margin="10,0,10,0" Click="insertButtonProduct_Click" />
+                                            <Button x:Name="upinfButtonProduct" Content="Изменить"  Width="80" Height="40" Margin="10,0,10,0" Click="upinfButtonProduct_Click" />
+                                            <Button x:Name="deleteButtonProduct" Content="Удалить"  Width="80" Height="40" Margin="10,0,10,0" Click="deleteButtonProduct_Click" />
+                                        </StackPanel>
+                                    </Grid>
+                                </TabItem.Content>
+                            </TabItem>
+                            <TabItem Header="Store">
+                                <TabItem.Content>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <DataGrid AutoGenerateColumns="False" x:Name="storeGrid" Margin="10,50,10,100">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="ID" Binding="{Binding Path=StoreId}" Width="100" />
+                                                <DataGridTextColumn Header="Sname" Binding="{Binding Path=Sname}" Width="100" />
+                                                <DataGridTextColumn Header="City" Binding="{Binding Path=City}" Width="100" />
+                                                <DataGridTextColumn Header="Street" Binding="{Binding Path=Street}" Width="100" />
+                                                <DataGridTextColumn Header="Building" Binding="{Binding Path=Building}" Width="100" />
+
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+
+                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,20" Height="40" Width="400" VerticalAlignment="Bottom">
+                                            <Button x:Name="updateButtonStore" Content="Обновить" Width="80" Height="40" Margin="10,0,10,0" Click="updateButtonStore_Click" />
+                                            <Button x:Name="insertButtonStore" Content="Добавить" Width="80" Height="40" Margin="10,0,10,0" Click="insertButtonStore_Click"  />
+                                            <Button x:Name="upinfButtonStore" Content="Изменить"  Width="80" Height="40" Margin="10,0,10,0" Click="upinfButtonStore_Click"  />
+                                            <Button x:Name="deleteButtonStore" Content="Удалить"  Width="80" Height="40" Margin="10,0,10,0" Click="deleteButtonStore_Click"  />
+                                        </StackPanel>
+                                    </Grid>
+                                </TabItem.Content>
+                            </TabItem>
+                            <TabItem Header="Wharehouse">
+                                <TabItem.Content>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <DataGrid AutoGenerateColumns="False" x:Name="warehouseGrid" Margin="10,50,10,100">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="ID" Binding="{Binding Path=WhousesId}" Width="100" />
+                                                <DataGridTextColumn Header="Wnumber" Binding="{Binding Path=Wnumber}" Width="100" />
+                                                <DataGridTextColumn Header="City" Binding="{Binding Path=City}" Width="100" />
+                                                <DataGridTextColumn Header="Street" Binding="{Binding Path=Street}" Width="100" />
+                                                <DataGridTextColumn Header="Building" Binding="{Binding Path=Building}" Width="100" />
+                                                <DataGridTextColumn Header="NameStorekeeper" Binding="{Binding Path=NameStorekeeper}" Width="100" />
+
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+
+                                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,20" Height="40" Width="400" VerticalAlignment="Bottom">
+                                            <Button x:Name="updateButtonWarehouse" Content="Обновить" Width="80" Height="40" Margin="10,0,10,0" Click="updateButtonWarehouse_Click"  />
+                                            <Button x:Name="insertButtonWarehouse" Content="Добавить" Width="80" Height="40" Margin="10,0,10,0" Click="insertButtonWarehouse_Click"   />
+                                            <Button x:Name="upinfButtonWarehouse" Content="Изменить"  Width="80" Height="40" Margin="10,0,10,0" Click="upinfButtonWarehouse_Click"   />
+                                            <Button x:Name="deleteButtonWarehouse" Content="Удалить"  Width="80" Height="40" Margin="10,0,10,0" Click="deleteButtonWarehouse_Click"   />
+                                        </StackPanel>
+                                    </Grid>
+                                </TabItem.Content>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Header="Товаровед">
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <DataGrid AutoGenerateColumns="False" x:Name="storeaccountingGrid" Margin="10,50,10,100">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ProductId" Binding="{Binding Path=ProductId}" Width="100"  />
+                                <DataGridTextColumn Header="StoreId" Binding="{Binding Path=StoreId}" Width="100" />
+                                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="100" />
+                                <DataGridTextColumn Header="Cost" Binding="{Binding Path=Cost}" Width="100" />
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,20" Height="40" Width="400" VerticalAlignment="Bottom">
+                            <Button x:Name="updateButtonStoreAccounting" Content="Обновить" Width="80" Height="40" Margin="10,0,10,0" Click="updateButtonStoreAccounting_Click" />
+                            <Button x:Name="insertButtonStoreAccounting" Content="Добавить" Width="80" Height="40" Margin="10,0,10,0" Click="insertButtonStoreAccounting_Click"  />
+                            <Button x:Name="upinfButtonStoreAccounting" Content="Изменить"  Width="80" Height="40" Margin="10,0,10,0" Click="upinfButtonStoreAccounting_Click" />
+                            <Button x:Name="deleteButtonStoreAccounting" Content="Удалить"  Width="80" Height="40" Margin="10,0,10,0" Click="deleteButtonStoreAccounting_Click"  />
+                        </StackPanel>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+            <TabItem Header="Кладовщик">
+                <TabItem.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <DataGrid AutoGenerateColumns="False" x:Name="warehouseaccountingGrid" Margin="10,50,10,100">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ProductId" Binding="{Binding Path=ProductId}"  Width="100"  />
+                                <DataGridTextColumn Header="WhousesId" Binding="{Binding Path=WhousesId}" Width="100" />
+                                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="100" />
+                                <DataGridTextColumn Header="Cost" Binding="{Binding Path=Cost}" Width="100" />
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,20" Height="40" Width="400" VerticalAlignment="Bottom">
+                            <Button x:Name="updateButtonWhousesAccounting" Content="Обновить" Width="80" Height="40" Margin="10,0,10,0" Click="updateButtonWhousesAccounting_Click"  />
+                            <Button x:Name="insertButtonWhousesAccounting" Content="Добавить" Width="80" Height="40" Margin="10,0,10,0" Click="insertButtonWhousesAccounting_Click"  />
+                            <Button x:Name="upinfButtonWhousesAccounting" Content="Изменить"  Width="80" Height="40" Margin="10,0,10,0" Click="upinfButtonWhousesAccounting_Click"  />
+                            <Button x:Name="deleteButtonWhousesAccounting" Content="Удалить"  Width="80" Height="40" Margin="10,0,10,0" Click="deleteButtonWhousesAccounting_Click"  />
+                        </StackPanel>
+                    </Grid>
+                </TabItem.Content>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>
