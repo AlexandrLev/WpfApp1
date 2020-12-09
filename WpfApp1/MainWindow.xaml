@@ -106,8 +106,8 @@
                         </Grid.RowDefinitions>
                         <DataGrid AutoGenerateColumns="False" x:Name="storeaccountingGrid" Margin="10,50,10,100">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="ProductId" Binding="{Binding Path=ProductId}" Width="100"  />
-                                <DataGridTextColumn Header="StoreId" Binding="{Binding Path=StoreId}" Width="100" />
+                                <DataGridComboBoxColumn x:Name="comboBoxStPr" Header="ProductId" TextBinding="{Binding Path=ProductId}" DisplayMemberPath="ProductId" Width="100"  />
+                                <DataGridComboBoxColumn x:Name="comboBoxStSt" Header="StoreId" TextBinding="{Binding Path=StoreId}" DisplayMemberPath="StoreId" Width="100"  />
                                 <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="100" />
                                 <DataGridTextColumn Header="Cost" Binding="{Binding Path=Cost}" Width="100" />
 
@@ -132,8 +132,8 @@
                         </Grid.RowDefinitions>
                         <DataGrid AutoGenerateColumns="False" x:Name="warehouseaccountingGrid" Margin="10,50,10,100">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="ProductId" Binding="{Binding Path=ProductId}"  Width="100"  />
-                                <DataGridTextColumn Header="WhousesId" Binding="{Binding Path=WhousesId}" Width="100" />
+                                <DataGridComboBoxColumn x:Name="comboBoxWhPr" Header="ProductId" TextBinding="{Binding Path=ProductId}" DisplayMemberPath="ProductId" Width="100"  />
+                                <DataGridComboBoxColumn x:Name="comboBoxWhWh" Header="WhousesId" TextBinding="{Binding Path=WhousesId}" DisplayMemberPath="WhousesId" Width="100"  />
                                 <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="100" />
                                 <DataGridTextColumn Header="Cost" Binding="{Binding Path=Cost}" Width="100" />
 

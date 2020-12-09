@@ -32,8 +32,29 @@ namespace WpfApp1
 
             var selectedCell = Grid.SelectedCells[selectedColumn];
             var cellContent = selectedCell.Column.GetCellContent(selectedCell.Item);
-            return (cellContent as TextBlock).Text;
+         
+                return (cellContent as TextBlock).Text;
         }
+        private string getDataFromCellstore(int selectedColumn, DataGrid Grid)
+        {
+            DataGridCellInfo cells = Grid.SelectedCells[selectedColumn];
+            var inf = cells.Item as StoreAccounting;
+            if (selectedColumn == 0)
+                return inf.ProductId.ToString();
+            else
+                return inf.StoreId.ToString();
+        }
+        private string getDataFromCellwh(int selectedColumn, DataGrid Grid)
+        {
+            DataGridCellInfo cells = Grid.SelectedCells[selectedColumn];
+            var inf = cells.Item as WarehouseAccounting;
+            if (selectedColumn == 0)
+                return inf.ProductId.ToString();
+            else
+                return inf.WhousesId.ToString();
+        }
+
+
 
         //PRODUCT
         private void updateButtonProduct_Click(object sender, RoutedEventArgs e)
@@ -269,7 +290,15 @@ namespace WpfApp1
             using (ProductDBContext db = new ProductDBContext())
             {
                 var data = db.StoreAccountings.ToList();
+                var data2 = db.Products.ToList();
+                var data3 = db.Stores.ToList();
+                
+               
+               comboBoxStPr.ItemsSource = data2;
+               comboBoxStSt.ItemsSource = data3;
                 storeaccountingGrid.ItemsSource = data;
+
+
             }
         }
 
@@ -279,7 +308,7 @@ namespace WpfApp1
             {
                 using (ProductDBContext db = new ProductDBContext())
                 {
-                    db.Database.ExecuteSqlRaw("EXECUTE ins_StoreAccounting  {0},{1},{2},{3};", getDataFromCell(0, storeaccountingGrid), getDataFromCell(1, storeaccountingGrid), getDataFromCell(2, storeaccountingGrid), getDataFromCell(3, storeaccountingGrid));
+                    db.Database.ExecuteSqlRaw("EXECUTE ins_StoreAccounting  {0},{1},{2},{3};", getDataFromCellstore(0, storeaccountingGrid), getDataFromCellstore(1, storeaccountingGrid), getDataFromCell(2, storeaccountingGrid), getDataFromCell(3, storeaccountingGrid));
                 }
                 
             }
@@ -296,7 +325,7 @@ namespace WpfApp1
             {
                 using (ProductDBContext db = new ProductDBContext())
                 {
-                    db.Database.ExecuteSqlRaw("EXECUTE up_StoreAccounting  {0},{1},{2},{3};", getDataFromCell(0, storeaccountingGrid), getDataFromCell(1, storeaccountingGrid), getDataFromCell(2, storeaccountingGrid), getDataFromCell(3, storeaccountingGrid));
+                    db.Database.ExecuteSqlRaw("EXECUTE up_StoreAccounting  {0},{1},{2},{3};", getDataFromCellstore(0, storeaccountingGrid), getDataFromCellstore(1, storeaccountingGrid), getDataFromCell(2, storeaccountingGrid), getDataFromCell(3, storeaccountingGrid));
                 }
             }
             catch (Exception ex)
@@ -309,8 +338,8 @@ namespace WpfApp1
         private void deleteButtonStoreAccounting_Click(object sender, RoutedEventArgs e)
         {
             try {
-                string inf = getDataFromCell(0, storeaccountingGrid);
-                string inf2 = getDataFromCell(1, storeaccountingGrid);
+                string inf = getDataFromCellstore(0, storeaccountingGrid);
+                string inf2 = getDataFromCellstore(1, storeaccountingGrid);
                 if (inf != null)
                 {
                     using (ProductDBContext db = new ProductDBContext())
@@ -338,6 +367,12 @@ namespace WpfApp1
             using (ProductDBContext db = new ProductDBContext())
             {
                 var data = db.WarehouseAccountings.ToList();
+                var data2 = db.Products.ToList();
+                var data3 = db.Warehouses.ToList();
+
+
+                comboBoxWhPr.ItemsSource = data2;
+                comboBoxWhWh.ItemsSource = data3;
                 warehouseaccountingGrid.ItemsSource = data;
             }
         }
@@ -347,7 +382,7 @@ namespace WpfApp1
             try { 
                 using (ProductDBContext db = new ProductDBContext())
                 {
-                    db.Database.ExecuteSqlRaw("EXECUTE ins_WarehouseAccounting  {0},{1},{2},{3};", getDataFromCell(0, warehouseaccountingGrid), getDataFromCell(1, warehouseaccountingGrid), getDataFromCell(2, warehouseaccountingGrid), getDataFromCell(3, warehouseaccountingGrid));
+                    db.Database.ExecuteSqlRaw("EXECUTE ins_WarehouseAccounting  {0},{1},{2},{3};", getDataFromCellwh(0, warehouseaccountingGrid), getDataFromCellwh(1, warehouseaccountingGrid), getDataFromCell(2, warehouseaccountingGrid), getDataFromCell(3, warehouseaccountingGrid));
                 }
             }
             catch (Exception ex) {
@@ -363,7 +398,7 @@ namespace WpfApp1
             try { 
                 using (ProductDBContext db = new ProductDBContext())
                 {
-                    db.Database.ExecuteSqlRaw("EXECUTE up_WarehouseAccounting  {0},{1},{2},{3};", getDataFromCell(0, warehouseaccountingGrid), getDataFromCell(1, warehouseaccountingGrid), getDataFromCell(2, warehouseaccountingGrid), getDataFromCell(3, warehouseaccountingGrid));
+                    db.Database.ExecuteSqlRaw("EXECUTE up_WarehouseAccounting  {0},{1},{2},{3};", getDataFromCellwh(0, warehouseaccountingGrid), getDataFromCellwh(1, warehouseaccountingGrid), getDataFromCell(2, warehouseaccountingGrid), getDataFromCell(3, warehouseaccountingGrid));
                 }
              }
             catch (Exception ex) {
@@ -378,8 +413,8 @@ namespace WpfApp1
         {
             try
             {
-                string inf = getDataFromCell(0, warehouseaccountingGrid);
-                string inf2 = getDataFromCell(1, warehouseaccountingGrid);
+                string inf = getDataFromCellwh(0, warehouseaccountingGrid);
+                string inf2 = getDataFromCellwh(1, warehouseaccountingGrid);
                 if (inf != null)
                 {
                     using (ProductDBContext db = new ProductDBContext())
@@ -398,4 +433,6 @@ namespace WpfApp1
             }
         }
     }
+
+   
 }
