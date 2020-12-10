@@ -25,6 +25,12 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
+            prod_up();
+            store_up();
+            warehouse_up();
+            storeacc_up();
+            whouseacc_up();
+
         }
 
 
@@ -41,21 +47,76 @@ namespace WpfApp1
         private string getDataFromCellstore(int selectedColumn, DataGrid Grid)
         {
             DataGridCellInfo cells = Grid.SelectedCells[selectedColumn];
-            var inf = cells.Item as StoreAccounting;
+            var inf = cells.Item as StAccDop;
             if (selectedColumn == 0)
-                return inf.ProductId.ToString();
+            {
+                int valueID = 0;
+                using (ProductDBContext db = new ProductDBContext())
+                {
+                    var data = db.Products.ToList();
+
+                    foreach (var item in data)
+                    {
+                        if (item.Name == inf.Name) valueID = item.ProductId;
+                    }
+
+                }
+
+                return valueID.ToString();
+            }
             else
-                return inf.StoreId.ToString();
+            {
+                int valueID = 0;
+                using (ProductDBContext db = new ProductDBContext())
+                {
+                    var data = db.Stores.ToList();
+
+                    foreach (var item in data)
+                    {
+                        if (item.Sname == inf.Sname) valueID = item.StoreId;
+                    }
+
+                }
+
+                return valueID.ToString();
+            }
         }
         //Getting data from DataGridComboBoxColumn cell (wareHouseAccounting)
         private string getDataFromCellwh(int selectedColumn, DataGrid Grid)
         {
             DataGridCellInfo cells = Grid.SelectedCells[selectedColumn];
-            var inf = cells.Item as WarehouseAccounting;
-            if (selectedColumn == 0)
-                return inf.ProductId.ToString();
+            var inf = cells.Item as WhAccDop;
+            if (selectedColumn == 0) {
+                int valueID = 0;
+                using (ProductDBContext db = new ProductDBContext())
+                {
+                    var data = db.Products.ToList();
+                    
+                    foreach (var item in data)
+                    {
+                        if (item.Name == inf.Name) valueID = item.ProductId;
+                    }
+
+                }
+
+            return valueID.ToString(); }
             else
-                return inf.WhousesId.ToString();
+            {
+                int valueID = 0;
+                using (ProductDBContext db = new ProductDBContext())
+                {
+                    var data = db.Warehouses.ToList();
+
+                    foreach (var item in data)
+                    {
+                        if (item.Wnumber == inf.Wnumber) valueID = item.WhousesId;
+                    }
+
+                }
+
+                return valueID.ToString();
+            }
+
         }
 
 
@@ -296,11 +357,22 @@ namespace WpfApp1
                 var data = db.StoreAccountings.ToList();
                 var data2 = db.Products.ToList();
                 var data3 = db.Stores.ToList();
-                
-               
-               comboBoxStPr.ItemsSource = data2;
-               comboBoxStSt.ItemsSource = data3;
-                storeaccountingGrid.ItemsSource = data;
+                var data4 = new List<StAccDop>();
+
+                foreach (var item in data)
+                {
+                    var it = new StAccDop
+                    {
+                        Name = item.Product.Name,
+                        Sname = item.Store.Sname,
+                        Quantity = item.Quantity,
+                        Cost = item.Cost
+                    };
+                    data4.Add(it);
+                }
+                comboBoxStPr.ItemsSource = data2;
+                comboBoxStSt.ItemsSource = data3;
+                storeaccountingGrid.ItemsSource = data4;
 
 
             }
@@ -373,11 +445,23 @@ namespace WpfApp1
                 var data = db.WarehouseAccountings.ToList();
                 var data2 = db.Products.ToList();
                 var data3 = db.Warehouses.ToList();
+                var data4 = new List<WhAccDop>();    
 
-
+                foreach (var item in data)
+                {
+                    var it = new WhAccDop
+                    {
+                        Name=item.Product.Name,
+                        Wnumber=item.Whouses.Wnumber,
+                        Quantity=item.Quantity,
+                        Cost= item.Cost
+                    };
+                    data4.Add(it);
+                }
                 comboBoxWhPr.ItemsSource = data2;
                 comboBoxWhWh.ItemsSource = data3;
-                warehouseaccountingGrid.ItemsSource = data;
+
+                warehouseaccountingGrid.ItemsSource = data4;
             }
         }
 
