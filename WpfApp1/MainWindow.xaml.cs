@@ -27,6 +27,8 @@ namespace WpfApp1
             InitializeComponent();
         }
 
+
+        //Getting data from cell
         private string getDataFromCell(int selectedColumn, DataGrid Grid)
         {
 
@@ -35,6 +37,7 @@ namespace WpfApp1
          
                 return (cellContent as TextBlock).Text;
         }
+        //Getting data from DataGridComboBoxColumn cell (storeAccounting)
         private string getDataFromCellstore(int selectedColumn, DataGrid Grid)
         {
             DataGridCellInfo cells = Grid.SelectedCells[selectedColumn];
@@ -44,6 +47,7 @@ namespace WpfApp1
             else
                 return inf.StoreId.ToString();
         }
+        //Getting data from DataGridComboBoxColumn cell (wareHouseAccounting)
         private string getDataFromCellwh(int selectedColumn, DataGrid Grid)
         {
             DataGridCellInfo cells = Grid.SelectedCells[selectedColumn];
