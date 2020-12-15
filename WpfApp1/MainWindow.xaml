@@ -100,55 +100,92 @@
             <TabItem Header="Товаровед">
                 <TabItem.Content>
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <DataGrid AutoGenerateColumns="False" x:Name="storeaccountingGrid" Margin="10,50,10,100">
-                            <DataGrid.Columns>
-                                <DataGridComboBoxColumn x:Name="comboBoxStPr" Header="Product Name" TextBinding="{Binding Path=Name }" DisplayMemberPath="Name" Width="150"   />
-                                <DataGridComboBoxColumn x:Name="comboBoxStSt" Header="Store name" TextBinding="{Binding Path=Sname}" DisplayMemberPath="Sname" Width="150"  />
-                                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="150" />
-                                <DataGridTextColumn Header="Cost" Binding="{Binding Path=Cost}" Width="150" />
+                        <TabControl>
+                            <TabItem Header="Учет магазина">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <DataGrid AutoGenerateColumns="False" x:Name="storeaccountingGrid" Margin="10,50,10,100">
+                                        <DataGrid.Columns>
+                                            <DataGridComboBoxColumn x:Name="comboBoxStPr" Header="Product Name" TextBinding="{Binding Path=Name }" DisplayMemberPath="Name" Width="150"   />
+                                            <DataGridComboBoxColumn x:Name="comboBoxStSt" Header="Store name" TextBinding="{Binding Path=Sname}" DisplayMemberPath="Sname" Width="150"  />
+                                            <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="150" />
+                                            <DataGridTextColumn Header="Cost" Binding="{Binding Path=Cost}" Width="150" />
 
-                            </DataGrid.Columns>
-                        </DataGrid>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
 
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,20" Height="40" Width="400" VerticalAlignment="Bottom">
-                            <Button x:Name="updateButtonStoreAccounting" Content="Обновить" Width="80" Height="40" Margin="10,0,10,0" Click="updateButtonStoreAccounting_Click" />
-                            <Button x:Name="insertButtonStoreAccounting" Content="Добавить" Width="80" Height="40" Margin="10,0,10,0" Click="insertButtonStoreAccounting_Click"  />
-                            <Button x:Name="upinfButtonStoreAccounting" Content="Изменить"  Width="80" Height="40" Margin="10,0,10,0" Click="upinfButtonStoreAccounting_Click" />
-                            <Button x:Name="deleteButtonStoreAccounting" Content="Удалить"  Width="80" Height="40" Margin="10,0,10,0" Click="deleteButtonStoreAccounting_Click"  />
-                        </StackPanel>
+                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,20" Height="40" Width="400" VerticalAlignment="Bottom">
+                                        <Button x:Name="updateButtonStoreAccounting" Content="Обновить" Width="80" Height="40" Margin="10,0,10,0" Click="updateButtonStoreAccounting_Click" />
+                                        <Button x:Name="insertButtonStoreAccounting" Content="Добавить" Width="80" Height="40" Margin="10,0,10,0" Click="insertButtonStoreAccounting_Click"  />
+                                        <Button x:Name="upinfButtonStoreAccounting" Content="Изменить"  Width="80" Height="40" Margin="10,0,10,0" Click="upinfButtonStoreAccounting_Click" />
+                                        <Button x:Name="deleteButtonStoreAccounting" Content="Удалить"  Width="80" Height="40" Margin="10,0,10,0" Click="deleteButtonStoreAccounting_Click"  />
+                                    </StackPanel>
+                                </Grid>
+                            </TabItem>
+                            <TabItem Header="Документ">
+                                <Grid>
+
+                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,20" Height="40" Width="100" VerticalAlignment="Bottom">
+                                        <Button x:Name="StoreAccountingReportButton" Content="Создать" Width="80" Height="40" Margin="10,0,10,0" Click="StoreAccountingReportButton_Click" />
+
+                                    </StackPanel>
+                                    <Label Content="Выберете :" HorizontalAlignment="Left" Margin="344,208,0,0" VerticalAlignment="Top" Height="28" Width="104"/>
+                                    <ComboBox x:Name="StoreAccountingReportComboBox"  Margin="344,248,344,0" Height="42" VerticalAlignment="Top" FontSize="16"/>
+
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
                     </Grid>
                 </TabItem.Content>
             </TabItem>
             <TabItem Header="Кладовщик">
                 <TabItem.Content>
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <DataGrid AutoGenerateColumns="False" x:Name="warehouseaccountingGrid" Margin="10,50,10,100">
-                            <DataGrid.Columns>
-                                <DataGridComboBoxColumn x:Name="comboBoxWhPr" Header="Product Name" TextBinding="{Binding Path=Name }" DisplayMemberPath="Name" Width="150"  />
-                                <!--<DataGridComboBoxColumn x:Name="comboBoxWhPr" Header="ProductId" TextBinding="{Binding Path=ProductId}" DisplayMemberPath="ProductId" Width="100"  />-->
-                                <DataGridComboBoxColumn x:Name="comboBoxWhWh" Header="Whouses number" TextBinding="{Binding Path=Wnumber}" DisplayMemberPath="Wnumber" Width="150"  />
-                                <!--<DataGridComboBoxColumn x:Name="comboBoxWhWh" Header="WhousesId" TextBinding="{Binding Path=WhousesId}" DisplayMemberPath="WhousesId" Width="100"  />-->
-                                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="150" />
-                                <DataGridTextColumn Header="Cost" Binding="{Binding Path=Cost}" Width="150" />
+                        <TabControl>
+                            <TabItem Header="Учет склада">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <DataGrid AutoGenerateColumns="False" x:Name="warehouseaccountingGrid" Margin="10,50,10,100">
+                                        <DataGrid.Columns>
+                                            <DataGridComboBoxColumn x:Name="comboBoxWhPr" Header="Product Name" TextBinding="{Binding Path=Name }" DisplayMemberPath="Name" Width="150"  />
+                                            <!--<DataGridComboBoxColumn x:Name="comboBoxWhPr" Header="ProductId" TextBinding="{Binding Path=ProductId}" DisplayMemberPath="ProductId" Width="100"  />-->
+                                            <DataGridComboBoxColumn x:Name="comboBoxWhWh" Header="Whouses number" TextBinding="{Binding Path=Wnumber}" DisplayMemberPath="Wnumber" Width="150"  />
+                                            <!--<DataGridComboBoxColumn x:Name="comboBoxWhWh" Header="WhousesId" TextBinding="{Binding Path=WhousesId}" DisplayMemberPath="WhousesId" Width="100"  />-->
+                                            <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity}" Width="150" />
+                                            <DataGridTextColumn Header="Cost" Binding="{Binding Path=Cost}" Width="150" />
 
-                            </DataGrid.Columns>
-                        </DataGrid>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
 
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,20" Height="40" Width="400" VerticalAlignment="Bottom">
-                            <Button x:Name="updateButtonWhousesAccounting" Content="Обновить" Width="80" Height="40" Margin="10,0,10,0" Click="updateButtonWhousesAccounting_Click"  />
-                            <Button x:Name="insertButtonWhousesAccounting" Content="Добавить" Width="80" Height="40" Margin="10,0,10,0" Click="insertButtonWhousesAccounting_Click"  />
-                            <Button x:Name="upinfButtonWhousesAccounting" Content="Изменить"  Width="80" Height="40" Margin="10,0,10,0" Click="upinfButtonWhousesAccounting_Click"  />
-                            <Button x:Name="deleteButtonWhousesAccounting" Content="Удалить"  Width="80" Height="40" Margin="10,0,10,0" Click="deleteButtonWhousesAccounting_Click"  />
-                        </StackPanel>
+                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,20" Height="40" Width="400" VerticalAlignment="Bottom">
+                                        <Button x:Name="updateButtonWhousesAccounting" Content="Обновить" Width="80" Height="40" Margin="10,0,10,0" Click="updateButtonWhousesAccounting_Click"  />
+                                        <Button x:Name="insertButtonWhousesAccounting" Content="Добавить" Width="80" Height="40" Margin="10,0,10,0" Click="insertButtonWhousesAccounting_Click"  />
+                                        <Button x:Name="upinfButtonWhousesAccounting" Content="Изменить"  Width="80" Height="40" Margin="10,0,10,0" Click="upinfButtonWhousesAccounting_Click"  />
+                                        <Button x:Name="deleteButtonWhousesAccounting" Content="Удалить"  Width="80" Height="40" Margin="10,0,10,0" Click="deleteButtonWhousesAccounting_Click"  />
+                                    </StackPanel>
+                                </Grid>
+                            </TabItem>
+                            <TabItem Header="Документ">
+                                <Grid>
+
+                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="0,0,0,20" Height="40" Width="100" VerticalAlignment="Bottom">
+                                        <Button x:Name="WhAccountingReportButton" Content="Создать" Width="80" Height="40" Margin="10,0,10,0" Click="WhAccountingReportButton_Click"  />
+
+                                    </StackPanel>
+                                    <Label Content="Выберете :" HorizontalAlignment="Left" Margin="344,208,0,0" VerticalAlignment="Top" Height="28" Width="104"/>
+                                    <ComboBox x:Name="WhAccountingReportComboBox"  Margin="344,248,344,0" Height="42" VerticalAlignment="Top" FontSize="16"/>
+
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
                     </Grid>
+                    
                 </TabItem.Content>
             </TabItem>
 

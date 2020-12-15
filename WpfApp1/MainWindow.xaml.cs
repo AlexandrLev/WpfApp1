@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -370,6 +371,8 @@ namespace WpfApp1
                     };
                     data4.Add(it);
                 }
+                StoreAccountingReportComboBox.DisplayMemberPath = "Sname";
+                StoreAccountingReportComboBox.ItemsSource = data3;
                 comboBoxStPr.ItemsSource = data2;
                 comboBoxStSt.ItemsSource = data3;
                 storeaccountingGrid.ItemsSource = data4;
@@ -458,6 +461,8 @@ namespace WpfApp1
                     };
                     data4.Add(it);
                 }
+                WhAccountingReportComboBox.DisplayMemberPath = "Wnumber";
+                WhAccountingReportComboBox.ItemsSource = data3;
                 comboBoxWhPr.ItemsSource = data2;
                 comboBoxWhWh.ItemsSource = data3;
 
@@ -518,6 +523,65 @@ namespace WpfApp1
             finally
             {
                 whouseacc_up();
+            }
+        }
+
+        private void StoreAccountingReportButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                
+                using (ProductDBContext db = new ProductDBContext())
+                {
+                    var storev = StoreAccountingReportComboBox.SelectedItem as Store;
+                    var storeRep = db.StoreAccountings.Where(p => p.StoreId == storev.StoreId).Join(db.Products, // второй набор
+                    u => u.ProductId, // свойство-селектор объекта из первого набора
+                    c => c.ProductId, // свойство-селектор объекта из второго набора
+                    (u, c) => new  ReportStoreAccounting// результат
+                    {
+                        Name = c.Name,
+                        Quantity = u.Quantity,
+                        Cost = u.Cost
+                    }).OrderBy(p => p.Name);
+
+                    var reportExcel = ReportGenerator.Generate(storeRep, storev.Sname);
+                    File.WriteAllBytes("../../../../ReportStoreAccounting.xlsx", reportExcel);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Только что произошло обработанное исключение: " + ex.Message, "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void WhAccountingReportButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                using (ProductDBContext db = new ProductDBContext())
+                {
+                    var Whv = WhAccountingReportComboBox.SelectedItem as Warehouse;
+                    var whRep = db.WarehouseAccountings.Where(p => p.WhousesId == Whv.WhousesId).Join(db.Products, // второй набор
+                    u => u.ProductId, // свойство-селектор объекта из первого набора
+                    c => c.ProductId, // свойство-селектор объекта из второго набора
+                    (u, c) => new ReportWhAccounting// результат
+                    {
+                        Name = c.Name,
+                        Quantity = u.Quantity,
+                        Cost = u.Cost,
+                        Sum = u.Quantity* u.Cost
+                    }).OrderBy(p => p.Name);
+
+                    var reportExcel = ReportGeneratorWh.Generate(whRep, Whv.Wnumber);
+                    File.WriteAllBytes("../../../../ReportWhAccounting.xlsx", reportExcel);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Только что произошло обработанное исключение: " + ex.Message, "Exception Sample", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
     }
