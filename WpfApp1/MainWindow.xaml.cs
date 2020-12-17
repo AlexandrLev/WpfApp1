@@ -559,25 +559,14 @@ namespace WpfApp1
         {
             try
             {
-
                 using (ProductDBContext db = new ProductDBContext())
                 {
-                    var Whv = WhAccountingReportComboBox.SelectedItem as Warehouse;
-                    var whRep = db.WarehouseAccountings.Where(p => p.WhousesId == Whv.WhousesId).Join(db.Products, // второй набор
-                    u => u.ProductId, // свойство-селектор объекта из первого набора
-                    c => c.ProductId, // свойство-селектор объекта из второго набора
-                    (u, c) => new ReportWhAccounting// результат
-                    {
-                        Name = c.Name,
-                        Quantity = u.Quantity,
-                        Cost = u.Cost,
-                        Sum = u.Quantity* u.Cost
-                    }).OrderBy(p => p.Name);
-
-                    var reportExcel = ReportGeneratorWh.Generate(whRep, Whv.Wnumber);
+                    var data3 = db.Warehouses.ToList();
+                    var reportExcel = ReportGeneratorWh.Generate(data3);
                     File.WriteAllBytes("../../../../ReportWhAccounting.xlsx", reportExcel);
+                        
+                    
                 }
-
             }
             catch (Exception ex)
             {
